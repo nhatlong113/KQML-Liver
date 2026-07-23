@@ -82,7 +82,7 @@ x' = (x \cdot \cos(x)) \cdot \frac{\pi}{2}
 This transformation enriches nonlinear structure and produces values suitable for quantum rotation-angle encoding.
 
 <p align="center">
-  <img src=""assets/Fig2_Feature_Augmentation_and_Nonlinear_Transformation_Pipeline.png" width="800"/>
+  <img src="assets/Fig2_Feature_Augmentation_and_Nonlinear_Transformation_Pipeline.png" width="800"/>
 </p>
 
 ### **2. Hybrid KAN–Quantum Architecture**
@@ -255,7 +255,7 @@ The analysis identifies **Total Bilirubin (TB)** as the most influential feature
 The extracted symbolic representation can also support lightweight deployment because it can be evaluated without storing the full neural network or requiring a deep-learning framework.
 
 <p align="center">
-  <img src="Fig5_Feature_Interaction_Analysis.png" width="850"/>
+  <img src="assets/Fig5_Feature_Interaction_Analysis.png" width="850"/>
 </p>
 
 ## **Why KQML-Liver?**
