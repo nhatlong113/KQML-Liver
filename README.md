@@ -92,9 +92,11 @@ The proposed architecture combines the strengths of classical functional learnin
 The complete end-to-end prediction pipeline is expressed as:
 
 ```math
-\mathbf{z}=f_{\mathrm{KAN}}(\mathbf{x}),
-\qquad
-\hat{y}=\operatorname{sigmoid}\!\left(g\!\left(U(\mathbf{z})|0\rangle^{\otimes m}\right)\right)
+\mathbf{z}=f_{\mathrm{KAN}}(\mathbf{x})
+```
+
+```math
+\hat{y}=\mathrm{sigmoid}\left(g\left(U(\mathbf{z})\left|0\right\rangle^{\otimes m}\right)\right)
 ```
 
 where the KAN transforms the enriched input vector into a compact latent representation, while the parameterized quantum circuit models complementary higher-order interactions.
@@ -142,20 +144,20 @@ The compact KAN representation is encoded into an m-qubit quantum circuit.
 First, all qubits are initialized in an equal superposition using Hadamard gates:
 
 ```math
-|\psi_0\rangle
+\left|\psi_0\right\rangle
 =
-H^{\otimes m}|0\rangle^{\otimes m}
+H^{\otimes m}\left|0\right\rangle^{\otimes m}
 ```
 
 The QAOA-inspired quantum embedding alternates between a cost unitary and a mixer unitary:
 
 ```math
-|\psi(\boldsymbol{\theta},\mathbf{z})\rangle
+\left|\psi(\theta,\mathbf{z})\right\rangle
 =
-\prod_{l=1}^{L}
-U_M(\boldsymbol{\beta}_l)
-U_C(\boldsymbol{\gamma}_l,\mathbf{z})
-|\psi_0\rangle
+U_M(\beta_L)U_C(\gamma_L,\mathbf{z})
+\cdots
+U_M(\beta_1)U_C(\gamma_1,\mathbf{z})
+\left|\psi_0\right\rangle
 ```
 
 The cost Hamiltonian encodes both individual latent features and pairwise feature interactions:
@@ -163,9 +165,11 @@ The cost Hamiltonian encodes both individual latent features and pairwise featur
 ```math
 H_C
 =
-\sum_i z_i Z_i
+\sum_{i=1}^{m} z_i Z_i
 +
-\sum_{i<j} J_{ij}Z_iZ_j
+\sum_{i=1}^{m-1}
+\sum_{j=i+1}^{m}
+J_{ij} Z_i Z_j
 ```
 
 The mixer Hamiltonian promotes exploration of the quantum state space:
@@ -207,9 +211,8 @@ The measured expectation vector is passed to the final sigmoid classifier:
 ```math
 \hat{y}
 =
-\sigma
-\left(
-\mathbf{w}^{\mathsf{T}}\mathbf{z}_q+b
+\sigma\left(
+\mathbf{w}^{T}\mathbf{z}_q+b
 \right)
 ```
 
