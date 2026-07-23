@@ -82,7 +82,7 @@ x' = (x \cdot \cos(x)) \cdot \frac{\pi}{2}
 This transformation enriches nonlinear structure and produces values suitable for quantum rotation-angle encoding.
 
 <p align="center">
-  <img src=""assets/Fig2_Feature_Augmentation_and_Nonlinear_Transformation_Pipeline.png" width="800"/>
+  <img src=""assets/Fig2_QGIN_Module.png" width="800"/>
 </p>
 
 ### **2. Hybrid KAN–Quantum Architecture**
@@ -134,7 +134,7 @@ where:
 This edge-level functional parameterization allows KAN to learn complex nonlinear relationships while preserving interpretability through the shapes of the learned spline functions.
 
 <p align="center">
-  <img src="Fig3_KAN_Module_Architecture.png" width="800"/>
+  <img src="assets/Fig3_QSCM_Module.png" width="800"/>
 </p>
 
 #### **Quantum Feature Processing**
@@ -219,7 +219,7 @@ The measured expectation vector is passed to the final sigmoid classifier:
 This design captures higher-order interactions while remaining compatible with the limited resources available in the **NISQ era**.
 
 <p align="center">
-  <img src="Fig4_Quantum_Module_Architecture.png" width="850"/>
+  <img src="assets/Fig4_QSAG_Module.png" width="850"/>
 </p>
 
 ### **3. Class-Imbalance Handling Without Synthetic Resampling**
