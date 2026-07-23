@@ -29,7 +29,7 @@ To address these challenges, this paper proposes **KQML-Liver**, an interpretabl
 The complete framework first enriches the original clinical features, compresses them into a compact latent representation using KAN, and then processes the latent features using a shallow quantum circuit. The final prediction is generated through a sigmoid classifier.
 
 <p align="center">
-  <img src="Fig1_Overall_Hybrid_KAN_Quantum_Architecture.png" width="850"/>
+  <img src="assets/Fig1_Overall_Hybrid_KAN_Quantum_Architecture.png" width="850"/>
 </p>
 
 ## **Dataset**
@@ -82,7 +82,7 @@ x' = (x \cdot \cos(x)) \cdot \frac{\pi}{2}
 This transformation enriches nonlinear structure and produces values suitable for quantum rotation-angle encoding.
 
 <p align="center">
-  <img src="Fig2_Feature_Augmentation_and_Nonlinear_Transformation_Pipeline.png" width="800"/>
+  <img src=""assets/Fig2_Feature_Augmentation_and_Nonlinear_Transformation_Pipeline.png" width="800"/>
 </p>
 
 ### **2. Hybrid KAN–Quantum Architecture**
