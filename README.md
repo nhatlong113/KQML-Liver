@@ -29,7 +29,7 @@ To address these challenges, this paper proposes **KQML-Liver**, an interpretabl
 The complete framework first enriches the original clinical features, compresses them into a compact latent representation using KAN, and then processes the latent features using a shallow quantum circuit. The final prediction is generated through a sigmoid classifier.
 
 <p align="center">
-  <img src="assets/Fig1_Overall_Hybrid_KAN_Quantum_Architecture.png" width="850"/>
+  <img src="assets/Fig1_QAC_UNet_Overall_Architecture.png" width="850"/>
 </p>
 
 ## **Dataset**
