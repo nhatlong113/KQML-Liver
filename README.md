@@ -89,21 +89,131 @@ This transformation enriches nonlinear structure and produces values suitable fo
 
 The proposed architecture combines the strengths of classical functional learning and quantum feature processing.
 
-The **KAN module** learns nonlinear mappings through trainable spline functions on network edges. It progressively compresses the enriched input into a compact latent representation while maintaining interpretability.
+The complete end-to-end prediction pipeline is expressed as:
 
-The latent vector is then processed by a lightweight quantum module composed of:
+```math
+\mathbf{z}=f_{\mathrm{KAN}}(\mathbf{x}),
+\qquad
+\hat{y}=\operatorname{sigmoid}\!\left(g\!\left(U(\mathbf{z})|0\rangle^{\otimes m}\right)\right)
+```
 
-- Hadamard initialization
-- Alternating QAOA-inspired cost and mixer layers
-- Trainable rotation gates
-- CNOT-based entanglement
-- Pauli-Z measurements
+where the KAN transforms the enriched input vector into a compact latent representation, while the parameterized quantum circuit models complementary higher-order interactions.
 
-This design captures higher-order interactions while remaining compatible with the resource constraints of the **NISQ era**.
+#### **KAN-Based Feature Learning**
+
+Unlike a conventional multilayer perceptron, which places fixed activation functions on nodes, KAN places learnable univariate functions on network edges.
+
+The latent representation is produced by composing multiple KAN layers:
+
+```math
+\mathbf{z}
+=
+f_L \circ f_{L-1} \circ \cdots \circ f_1(\mathbf{x})
+```
+
+At layer l, the output of node j is computed by aggregating the transformed outputs from all nodes in the previous layer:
+
+```math
+h_j^{(l)}
+=
+\sum_{i=1}^{m_{l-1}}
+\phi_{i,j}^{(l)}
+\left(
+h_i^{(l-1)}
+\right)
+```
+
+where:
+
+- `h_i^(l-1)` is the output of node i in the previous layer
+- `phi_i,j^(l)` is a learnable spline-based function on the edge from node i to node j
+- `m_(l-1)` is the number of nodes in the previous layer
+
+This edge-level functional parameterization allows KAN to learn complex nonlinear relationships while preserving interpretability through the shapes of the learned spline functions.
 
 <p align="center">
   <img src="Fig3_KAN_Module_Architecture.png" width="800"/>
 </p>
+
+#### **Quantum Feature Processing**
+
+The compact KAN representation is encoded into an m-qubit quantum circuit.
+
+First, all qubits are initialized in an equal superposition using Hadamard gates:
+
+```math
+|\psi_0\rangle
+=
+H^{\otimes m}|0\rangle^{\otimes m}
+```
+
+The QAOA-inspired quantum embedding alternates between a cost unitary and a mixer unitary:
+
+```math
+|\psi(\boldsymbol{\theta},\mathbf{z})\rangle
+=
+\prod_{l=1}^{L}
+U_M(\boldsymbol{\beta}_l)
+U_C(\boldsymbol{\gamma}_l,\mathbf{z})
+|\psi_0\rangle
+```
+
+The cost Hamiltonian encodes both individual latent features and pairwise feature interactions:
+
+```math
+H_C
+=
+\sum_i z_i Z_i
++
+\sum_{i<j} J_{ij}Z_iZ_j
+```
+
+The mixer Hamiltonian promotes exploration of the quantum state space:
+
+```math
+H_M
+=
+\sum_i X_i
+```
+
+The corresponding parameterized unitaries are:
+
+```math
+U_C(\gamma_l)
+=
+e^{-i\gamma_l H_C},
+\qquad
+U_M(\beta_l)
+=
+e^{-i\beta_l H_M}
+```
+
+After the QAOA-inspired layers, CNOT gates introduce additional inter-qubit correlations. Each qubit is then measured in the Pauli-Z basis:
+
+```math
+\mathbf{z}_q
+=
+\left[
+\langle Z_1\rangle,
+\langle Z_2\rangle,
+\ldots,
+\langle Z_m\rangle
+\right]
+\in [-1,1]^m
+```
+
+The measured expectation vector is passed to the final sigmoid classifier:
+
+```math
+\hat{y}
+=
+\sigma
+\left(
+\mathbf{w}^{\mathsf{T}}\mathbf{z}_q+b
+\right)
+```
+
+This design captures higher-order interactions while remaining compatible with the limited resources available in the **NISQ era**.
 
 <p align="center">
   <img src="Fig4_Quantum_Module_Architecture.png" width="850"/>
