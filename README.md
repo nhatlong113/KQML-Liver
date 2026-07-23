@@ -1,5 +1,5 @@
 ## **KAN Neural Network & Quantum Machine Learning for ILPD Dataset** 
-This paper is under review process of **MDAI 2026 Conferrence**. 
+This paper is under review process of **ACIVS 2026 Conferrence** - a B-ranked conference at ICORE ranks. 
 ### **Introduction**
 Despite the global burden of **liver disease**, which causes approximately **two million deaths annually**, existing **Machine Learning (ML)** and **Quantum Machine Learning (QML)** diagnostic approaches often suffer from limited interpretability or suboptimal performance.
 ### **Proposed Method**
