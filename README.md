@@ -2,7 +2,7 @@
 
 ## **Interpretable Hybrid Quantum Machine Learning with Kolmogorov–Arnold Networks for Liver Disease Classification**
 
-> This paper is currently under review at **ACIVS 2026**, an **ICORE B-ranked conference**.
+> **Under review at Engineering Applications of Artificial Intelligence (Q1, Scimago)**
 
 ## **Introduction**
 
@@ -288,10 +288,10 @@ Rather than relying on a large quantum circuit, the KAN module first produces a 
 The citation information will be updated after the paper is officially published.
 
 ```bibtex
-@inproceedings{nguyen2026kqmlliver,
+@article{nguyen2026kqmlliver,
   title     = {KQML-Liver: Interpretable Hybrid Quantum Machine Learning with Kolmogorov--Arnold Networks for Liver Disease Classification},
   author    = {Nguyen, Nhat-Long and Dinh, Viet-Loi and Pham, Trong-Nghia},
-  booktitle = {Proceedings of ACIVS 2026},
+  journal   = {Engineering Applications of Artificial Intelligence},
   year      = {2026},
   note      = {Under review}
 }
